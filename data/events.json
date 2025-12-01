@@ -1,0 +1,183 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Minimum Wage Increase to $20/hour",
+      "description": "City Council proposes raising minimum wage from $15 to $20. Workers can't afford rent. Small businesses warn of closures.",
+      "category": "economic",
+      "optionA": {
+        "text": "SUPPORT: Raise to $20",
+        "shortLabel": "Support",
+        "metricChanges": {
+          "treasury": -10,
+          "publicTrust": 15,
+          "intlReputation": 5,
+          "socialStability": 10
+        },
+        "characterImpacts": [
+          { "id": "B5", "change": 20 },
+          { "id": "C9", "change": 18 },
+          { "id": "A1", "change": 12 },
+          { "id": "A2", "change": 15 },
+          { "id": "B7", "change": -15 },
+          { "id": "A4", "change": -20 }
+        ]
+      },
+      "optionB": {
+        "text": "OPPOSE: Keep at $15",
+        "shortLabel": "Oppose",
+        "metricChanges": {
+          "treasury": 8,
+          "publicTrust": -12,
+          "intlReputation": -3,
+          "socialStability": -8
+        },
+        "characterImpacts": [
+          { "id": "B7", "change": 18 },
+          { "id": "A4", "change": 20 },
+          { "id": "C11", "change": 10 },
+          { "id": "B5", "change": -20 },
+          { "id": "C9", "change": -18 },
+          { "id": "A1", "change": -12 }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "Police Budget: Cut 50%?",
+      "description": "Activists demand 'Defund the Police' - cut budget by 50%. Police union warns crime will surge and officers will quit.",
+      "category": "justice",
+      "optionA": {
+        "text": "CUT: Reduce budget by 50%",
+        "shortLabel": "Cut",
+        "metricChanges": {
+          "treasury": 20,
+          "publicTrust": -15,
+          "intlReputation": 10,
+          "socialStability": -20
+        },
+        "characterImpacts": [
+          { "id": "C9", "change": 25 },
+          { "id": "D13", "change": 22 },
+          { "id": "A2", "change": 15 },
+          { "id": "C10", "change": 18 },
+          { "id": "B8", "change": -30 },
+          { "id": "A1", "change": -12 },
+          { "id": "B6", "change": -10 },
+          { "id": "A3", "change": -15 }
+        ]
+      },
+      "optionB": {
+        "text": "MAINTAIN: Keep current funding",
+        "shortLabel": "Maintain",
+        "metricChanges": {
+          "treasury": -12,
+          "publicTrust": 8,
+          "intlReputation": -5,
+          "socialStability": 15
+        },
+        "characterImpacts": [
+          { "id": "B8", "change": 25 },
+          { "id": "A1", "change": 12 },
+          { "id": "A3", "change": 20 },
+          { "id": "B6", "change": 15 },
+          { "id": "C9", "change": -25 },
+          { "id": "D13", "change": -22 },
+          { "id": "A2", "change": -10 },
+          { "id": "C10", "change": -15 }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Amazon HQ2: Tax Breaks or No Deal?",
+      "description": "Amazon wants $3B in tax breaks for Queens HQ. Promises 25,000 jobs but locals call it corporate welfare.",
+      "category": "economic",
+      "optionA": {
+        "text": "YES: Give Amazon the tax breaks",
+        "shortLabel": "Yes",
+        "metricChanges": {
+          "treasury": -15,
+          "publicTrust": -10,
+          "intlReputation": 15,
+          "socialStability": 5
+        },
+        "characterImpacts": [
+          { "id": "A4", "change": 20 },
+          { "id": "C11", "change": 18 },
+          { "id": "B7", "change": 12 },
+          { "id": "C12", "change": 15 },
+          { "id": "C9", "change": -20 },
+          { "id": "A2", "change": -15 },
+          { "id": "B5", "change": -12 },
+          { "id": "D13", "change": -18 }
+        ]
+      },
+      "optionB": {
+        "text": "NO: Reject Amazon's demands",
+        "shortLabel": "No",
+        "metricChanges": {
+          "treasury": 5,
+          "publicTrust": 8,
+          "intlReputation": -12,
+          "socialStability": -5
+        },
+        "characterImpacts": [
+          { "id": "C9", "change": 22 },
+          { "id": "A2", "change": 18 },
+          { "id": "B5", "change": 15 },
+          { "id": "D13", "change": 20 },
+          { "id": "A4", "change": -22 },
+          { "id": "C11", "change": -20 },
+          { "id": "B7", "change": -10 },
+          { "id": "C12", "change": -15 }
+        ]
+      }
+    }
+  ],
+  "_template": {
+    "id": 0,
+    "title": "Event Title",
+    "description": "Event description explaining the dilemma",
+    "category": "economic|justice|housing|environment|infrastructure|health",
+    "optionA": {
+      "text": "Full text description of option A",
+      "shortLabel": "Short label",
+      "metricChanges": {
+        "treasury": 0,
+        "publicTrust": 0,
+        "intlReputation": 0,
+        "socialStability": 0
+      },
+      "characterImpacts": [
+        { "id": "A1", "change": 0 }
+      ]
+    },
+    "optionB": {
+      "text": "Full text description of option B",
+      "shortLabel": "Short label",
+      "metricChanges": {
+        "treasury": 0,
+        "publicTrust": 0,
+        "intlReputation": 0,
+        "socialStability": 0
+      },
+      "characterImpacts": [
+        { "id": "A1", "change": 0 }
+      ]
+    }
+  },
+  "_notes": {
+    "totalEvents": 32,
+    "completed": 3,
+    "remaining": 29,
+    "categories": [
+      "economic (wealth, taxes, business)",
+      "justice (police, crime, courts)",
+      "housing (rent, homelessness, development)",
+      "environment (climate, pollution, green energy)",
+      "infrastructure (transit, roads, utilities)",
+      "health (healthcare, COVID, mental health)"
+    ]
+  }
+}
