@@ -29,7 +29,7 @@ function CharacterImage({ char, size = "80px" }) {
   const [imgError, setImgError] = React.useState(false);
 
   if (imgError || !char.icon) {
-    return <div style={{ fontSize: size === "120px" ? "80px" : "40px" }}>{char.fallbackEmoji || "🐾"}</div>;
+    return <div style={{ fontSize: size === "180px" ? "120px" : "40px" }}>{char.fallbackEmoji || "🐾"}</div>;
   }
 
   return (
@@ -39,43 +39,6 @@ function CharacterImage({ char, size = "80px" }) {
       style={{ width: size, height: size, objectFit: "contain" }}
       onError={() => setImgError(true)}
     />
-  );
-}
-
-// ===== PIXEL BORDER DECORATION =====
-function PixelBorders() {
-  const blockStyle = {
-    position: "absolute",
-    background: "#ff9346",
-    width: "105px",
-    height: "40px"
-  };
-
-  return (
-    <>
-      {/* Left side blocks */}
-      <div style={{ ...blockStyle, left: "89px", top: "0" }} />
-      <div style={{ ...blockStyle, left: "89px", top: "79px" }} />
-      <div style={{ ...blockStyle, left: "89px", top: "159px" }} />
-      <div style={{ ...blockStyle, left: "89px", top: "238px" }} />
-      
-      {/* Right side blocks */}
-      <div style={{ ...blockStyle, right: "89px", top: "0" }} />
-      <div style={{ ...blockStyle, right: "89px", top: "79px" }} />
-      <div style={{ ...blockStyle, right: "89px", top: "156px" }} />
-      <div style={{ ...blockStyle, right: "89px", top: "235px" }} />
-      
-      {/* Smaller connecting blocks */}
-      <div style={{ ...blockStyle, left: "105px", top: "40px", width: "72px", height: "39px" }} />
-      <div style={{ ...blockStyle, left: "105px", top: "119px", width: "72px" }} />
-      <div style={{ ...blockStyle, left: "105px", top: "199px", width: "72px", height: "39px" }} />
-      <div style={{ ...blockStyle, left: "105px", top: "278px", width: "72px" }} />
-      
-      <div style={{ ...blockStyle, right: "105px", top: "40px", width: "72px", height: "39px" }} />
-      <div style={{ ...blockStyle, right: "105px", top: "119px", width: "72px" }} />
-      <div style={{ ...blockStyle, right: "105px", top: "196px", width: "72px", height: "39px" }} />
-      <div style={{ ...blockStyle, right: "105px", top: "275px", width: "72px" }} />
-    </>
   );
 }
 
@@ -273,7 +236,6 @@ function AnimalKingdomGame() {
   if (currentState === GAME_STATES.MENU) {
     return (
       <div style={{ background: "#00bbb8", minHeight: "100vh", padding: "40px", textAlign: "center", position: "relative" }}>
-        <PixelBorders />
         
         <div style={{ position: "relative", zIndex: 1, maxWidth: "700px", margin: "0 auto", paddingTop: "60px" }}>
           <h1 style={{ fontSize: "56px", marginBottom: "30px", color: "#fff", fontWeight: "bold" }}>
@@ -335,41 +297,75 @@ function AnimalKingdomGame() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <PixelBorders />
 
         <div style={{ position: "relative", zIndex: 1 }}>
           {/* Metrics */}
           <div style={{ display: "flex", gap: "15px", marginBottom: "20px", justifyContent: "center", paddingTop: "20px" }}>
-            {Object.entries(metrics).map(([k, v]) => (
-              <div key={k} style={{ flex: 1, maxWidth: "235px" }}>
-                <div style={{ 
-                  background: "#277c38", 
-                  height: "36px", 
-                  borderRadius: "100px",
-                  position: "relative",
-                  border: "3px solid #fff"
-                }}>
+            {Object.entries(metrics).map(([k, v]) => {
+              const labels = {
+                treasury: "Treasury",
+                publicTrust: "Public Trust",
+                intlReputation: "Int'l Reputation",
+                socialStability: "Social Stability"
+              };
+              
+              // Simple color system: orange if <20, green otherwise
+              const colors = v < 20 
+                ? {
+                    bg: "#D35400",     // Dark orange
+                    fill: "#FFB84D",   // Light orange
+                    border: "#FF8C00"  // Orange border
+                  }
+                : {
+                    bg: "#277c38",     // Dark green
+                    fill: "#c2ffce",   // Light green
+                    border: "#fff"     // White border
+                  };
+              
+              return (
+                <div key={k} style={{ flex: 1, maxWidth: "235px" }}>
                   <div style={{ 
-                    background: "#c2ffce", 
-                    height: "100%", 
-                    width: `${v}%`,
-                    borderRadius: "100px",
-                    transition: "width 0.3s"
-                  }} />
-                  <div style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                    color: "#277c38"
+                    textAlign: "center", 
+                    marginBottom: "8px", 
+                    fontSize: "14px", 
+                    fontWeight: "bold", 
+                    color: "#fff",
+                    textTransform: "capitalize"
                   }}>
-                    {Math.round(v)}
+                    {labels[k]}
+                    {v < 20 && " ⚠️"}
+                  </div>
+                  <div style={{ 
+                    background: colors.bg,
+                    height: "36px", 
+                    borderRadius: "100px",
+                    position: "relative",
+                    border: `3px solid ${colors.border}`,
+                    transition: "all 0.3s"
+                  }}>
+                    <div style={{ 
+                      background: colors.fill,
+                      height: "100%", 
+                      width: `${v}%`,
+                      borderRadius: "100px",
+                      transition: "width 0.3s, background 0.3s"
+                    }} />
+                    <div style={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                      color: "#fff",
+                      textShadow: "0 2px 4px rgba(0,0,0,0.5)"
+                    }}>
+                      {Math.round(v)}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Main Layout */}
@@ -411,12 +407,14 @@ function AnimalKingdomGame() {
                 display: "flex",
                 gap: "40px",
                 alignItems: "center",
-                maxWidth: "900px"
+                maxWidth: "900px",
+                position: "relative",
+                zIndex: 10
               }}
               onMouseDown={handleMouseDown}
               onTouchStart={handleTouchStart}
             >
-              {mainChar && <CharacterImage char={mainChar} size="120px" />}
+              {mainChar && <CharacterImage char={mainChar} size="180px" />}
               
               <div style={{ flex: 1 }}>
                 <p style={{ fontSize: "40px", color: "#fff", marginBottom: "40px", fontWeight: "bold", lineHeight: "normal" }}>
@@ -490,7 +488,6 @@ function AnimalKingdomGame() {
   if (currentState === GAME_STATES.RESULTS) {
     return (
       <div style={{ background: "#00bbb8", minHeight: "100vh", padding: "40px", textAlign: "center", position: "relative" }}>
-        <PixelBorders />
         
         <div style={{ position: "relative", zIndex: 1, paddingTop: "60px" }}>
           <h1 style={{ fontSize: "48px", marginBottom: "20px", color: "#fff", fontWeight: "bold" }}>
@@ -552,7 +549,6 @@ function AnimalKingdomGame() {
                    metrics.intlReputation <= 0 ? "INTERNATIONAL CRISIS" : "CIVIL UNREST";
     return (
       <div style={{ background: "#00bbb8", minHeight: "100vh", padding: "40px", textAlign: "center", position: "relative" }}>
-        <PixelBorders />
         
         <div style={{ position: "relative", zIndex: 1, paddingTop: "60px" }}>
           <h1 style={{ fontSize: "48px", marginBottom: "20px", color: "#fff", fontWeight: "bold" }}>
