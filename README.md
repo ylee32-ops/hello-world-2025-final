@@ -26,3 +26,5 @@ Each has different priorities: environmentalists want fossil fuel bans, business
 💧 **Resources**: Water Rationing, Food Distribution  
 🦁 **Wildlife**: Hunting Season, Predator Protection, Migration Routes, Sanctuary Expansion  
 💰 **Economy**: Tourism Development
+
+<img width="950" height="664" alt="image" src="https://github.com/user-attachments/assets/0221f28f-d946-4c18-8be7-5e54e201ce51" />
