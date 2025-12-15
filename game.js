@@ -1,256 +1,140 @@
-import React, { useState, useRef } from 'react';
+// ===== ANIMAL KINGDOM GAME =====
 
-const EVENTS = [
-  {
-    id: 1,
-    title: "Minimum Wage → $20/hour",
-    description: "City Council proposes raising minimum wage from $15 to $20. Workers can't afford rent. Small businesses warn of closures.",
-    optionA: {
-      text: "SUPPORT: Raise to $20",
-      metricChanges: { treasury: -10, publicTrust: 15, intlReputation: 5, socialStability: 10 },
-      characterImpacts: [
-        { id: "B5", change: 20 }, { id: "C9", change: 18 }, { id: "A1", change: 12 },
-        { id: "A2", change: 15 }, { id: "B7", change: -15 }, { id: "A4", change: -20 }
-      ]
-    },
-    optionB: {
-      text: "OPPOSE: Keep at $15",
-      metricChanges: { treasury: 8, publicTrust: -12, intlReputation: -3, socialStability: -8 },
-      characterImpacts: [
-        { id: "B7", change: 18 }, { id: "A4", change: 20 }, { id: "C11", change: 10 },
-        { id: "B5", change: -20 }, { id: "C9", change: -18 }, { id: "A1", change: -12 }
-      ]
-    }
-  },
-  {
-    id: 2,
-    title: "Police Budget: Cut 50%?",
-    description: "Activists demand police budget cuts. Police union warns crime will surge.",
-    optionA: {
-      text: "CUT: Reduce 50%",
-      metricChanges: { treasury: 20, publicTrust: -15, intlReputation: 10, socialStability: -20 },
-      characterImpacts: [
-        { id: "C9", change: 25 }, { id: "D13", change: 22 }, { id: "A2", change: 15 },
-        { id: "B8", change: -30 }, { id: "A1", change: -12 }, { id: "B6", change: -10 }
-      ]
-    },
-    optionB: {
-      text: "MAINTAIN: Keep funding",
-      metricChanges: { treasury: -12, publicTrust: 8, intlReputation: -5, socialStability: 15 },
-      characterImpacts: [
-        { id: "B8", change: 25 }, { id: "A1", change: 12 }, { id: "B6", change: 15 },
-        { id: "C9", change: -25 }, { id: "D13", change: -22 }, { id: "A2", change: -10 }
-      ]
-    }
-  },
-  {
-    id: 3,
-    title: "Amazon HQ2: Tax Breaks?",
-    description: "Amazon wants $3B in tax breaks for Queens HQ. 25K jobs vs corporate welfare?",
-    optionA: {
-      text: "YES: Give tax breaks",
-      metricChanges: { treasury: -15, publicTrust: -10, intlReputation: 15, socialStability: 5 },
-      characterImpacts: [
-        { id: "A4", change: 20 }, { id: "C11", change: 18 }, { id: "B7", change: 12 },
-        { id: "C9", change: -20 }, { id: "A2", change: -15 }, { id: "B5", change: -12 }
-      ]
-    },
-    optionB: {
-      text: "NO: Reject Amazon",
-      metricChanges: { treasury: 5, publicTrust: 8, intlReputation: -12, socialStability: -5 },
-      characterImpacts: [
-        { id: "C9", change: 22 }, { id: "A2", change: 18 }, { id: "B5", change: 15 },
-        { id: "A4", change: -22 }, { id: "C11", change: -20 }, { id: "B7", change: -10 }
-      ]
-    }
-  },
-  {
-    id: 4,
-    title: "Rent Control Expansion",
-    description: "Expand rent control to all buildings? Tenants want it. Landlords threaten no maintenance.",
-    optionA: {
-      text: "EXPAND: All buildings",
-      metricChanges: { treasury: -8, publicTrust: 18, intlReputation: 5, socialStability: 12 },
-      characterImpacts: [
-        { id: "C9", change: 25 }, { id: "B5", change: 20 }, { id: "A2", change: 18 },
-        { id: "D14", change: 22 }, { id: "B7", change: -18 }, { id: "A4", change: -25 }
-      ]
-    },
-    optionB: {
-      text: "STATUS QUO: No expansion",
-      metricChanges: { treasury: 5, publicTrust: -15, intlReputation: 8, socialStability: -10 },
-      characterImpacts: [
-        { id: "B7", change: 20 }, { id: "A4", change: 22 }, { id: "C11", change: 12 },
-        { id: "C9", change: -25 }, { id: "B5", change: -20 }, { id: "A2", change: -15 }
-      ]
-    }
-  },
-  {
-    id: 5,
-    title: "Subway Fare: $3 → $4?",
-    description: "MTA needs money for repairs. Raise subway fare?",
-    optionA: {
-      text: "RAISE: $3 → $4",
-      metricChanges: { treasury: 15, publicTrust: -18, intlReputation: -5, socialStability: -12 },
-      characterImpacts: [
-        { id: "B7", change: 10 }, { id: "A4", change: 12 },
-        { id: "A1", change: -20 }, { id: "B5", change: -22 }, { id: "C9", change: -25 }
-      ]
-    },
-    optionB: {
-      text: "FREEZE: Keep at $3",
-      metricChanges: { treasury: -20, publicTrust: 15, intlReputation: 3, socialStability: 10 },
-      characterImpacts: [
-        { id: "A1", change: 20 }, { id: "B5", change: 22 }, { id: "C9", change: 25 },
-        { id: "B7", change: -8 }, { id: "A4", change: -10 }
-      ]
-    }
-  },
-  {
-    id: 6,
-    title: "Green New Deal NYC",
-    description: "Ban fossil fuels by 2030? Climate activists say emergency. Unions worry about jobs.",
-    optionA: {
-      text: "YES: Ban by 2030",
-      metricChanges: { treasury: -25, publicTrust: 10, intlReputation: 20, socialStability: -8 },
-      characterImpacts: [
-        { id: "D13", change: 30 }, { id: "C9", change: 20 }, { id: "A2", change: 15 },
-        { id: "A1", change: -18 }, { id: "B7", change: -15 }, { id: "A4", change: -22 }
-      ]
-    },
-    optionB: {
-      text: "NO: Gradual transition",
-      metricChanges: { treasury: -5, publicTrust: -8, intlReputation: -10, socialStability: 5 },
-      characterImpacts: [
-        { id: "A1", change: 15 }, { id: "B7", change: 18 }, { id: "A4", change: 20 },
-        { id: "D13", change: -30 }, { id: "C9", change: -18 }, { id: "A2", change: -12 }
-      ]
-    }
-  },
-  {
-    id: 7,
-    title: "Public Housing Crisis",
-    description: "NYCHA buildings failing. $40B repair backlog. Privatize or massive public investment?",
-    optionA: {
-      text: "PRIVATIZE: Sell to developers",
-      metricChanges: { treasury: 30, publicTrust: -20, intlReputation: -8, socialStability: -15 },
-      characterImpacts: [
-        { id: "A4", change: 25 }, { id: "B7", change: 20 }, { id: "C11", change: 15 },
-        { id: "C9", change: -28 }, { id: "B5", change: -25 }, { id: "D14", change: -30 }
-      ]
-    },
-    optionB: {
-      text: "INVEST: $40B public funding",
-      metricChanges: { treasury: -35, publicTrust: 20, intlReputation: 8, socialStability: 15 },
-      characterImpacts: [
-        { id: "C9", change: 28 }, { id: "B5", change: 25 }, { id: "D14", change: 30 },
-        { id: "A4", change: -25 }, { id: "B7", change: -18 }, { id: "C11", change: -12 }
-      ]
-    }
-  },
-  {
-    id: 8,
-    title: "Stop-and-Frisk Return?",
-    description: "Crime up 15%. Police union wants stop-and-frisk back. Civil rights groups oppose.",
-    optionA: {
-      text: "RESTORE: Bring it back",
-      metricChanges: { treasury: 5, publicTrust: -18, intlReputation: -15, socialStability: -20 },
-      characterImpacts: [
-        { id: "B8", change: 30 }, { id: "A1", change: 10 }, { id: "B6", change: 12 },
-        { id: "C9", change: -35 }, { id: "A2", change: -25 }, { id: "D14", change: -28 }
-      ]
-    },
-    optionB: {
-      text: "REFUSE: Community policing",
-      metricChanges: { treasury: -10, publicTrust: 12, intlReputation: 10, socialStability: 8 },
-      characterImpacts: [
-        { id: "C9", change: 30 }, { id: "A2", change: 22 }, { id: "D14", change: 25 },
-        { id: "B8", change: -25 }, { id: "A1", change: -8 }, { id: "B6", change: -10 }
-      ]
-    }
-  },
-  {
-    id: 9,
-    title: "Congestion Pricing",
-    description: "Charge $15 to drive into Manhattan. MTA needs revenue. Outer borough residents angry.",
-    optionA: {
-      text: "IMPLEMENT: $15 charge",
-      metricChanges: { treasury: 25, publicTrust: -15, intlReputation: 12, socialStability: -10 },
-      characterImpacts: [
-        { id: "D13", change: 25 }, { id: "A2", change: 18 }, { id: "C11", change: 15 },
-        { id: "A1", change: -20 }, { id: "B7", change: -22 }, { id: "B6", change: -18 }
-      ]
-    },
-    optionB: {
-      text: "CANCEL: No charge",
-      metricChanges: { treasury: -20, publicTrust: 10, intlReputation: -8, socialStability: 5 },
-      characterImpacts: [
-        { id: "A1", change: 20 }, { id: "B7", change: 22 }, { id: "B6", change: 18 },
-        { id: "D13", change: -25 }, { id: "A2", change: -15 }, { id: "C11", change: -12 }
-      ]
-    }
-  },
-  {
-    id: 10,
-    title: "Sanctuary City Status",
-    description: "Federal government threatens to cut funding unless NYC cooperates with ICE.",
-    optionA: {
-      text: "COOPERATE: Work with ICE",
-      metricChanges: { treasury: 15, publicTrust: -25, intlReputation: -20, socialStability: -18 },
-      characterImpacts: [
-        { id: "B8", change: 20 }, { id: "A4", change: 15 }, { id: "B7", change: 12 },
-        { id: "C9", change: -35 }, { id: "A2", change: -30 }, { id: "B5", change: -32 }
-      ]
-    },
-    optionB: {
-      text: "RESIST: Keep sanctuary status",
-      metricChanges: { treasury: -18, publicTrust: 20, intlReputation: 15, socialStability: 12 },
-      characterImpacts: [
-        { id: "C9", change: 35 }, { id: "A2", change: 30 }, { id: "B5", change: 32 },
-        { id: "B8", change: -18 }, { id: "A4", change: -12 }, { id: "B7", change: -10 }
-      ]
-    }
+// ===== GAME STATES =====
+const GAME_STATES = {
+  MENU: "MENU",
+  PLAY: "PLAY",
+  RESULTS: "RESULTS",
+  GAME_OVER: "GAME_OVER"
+};
+
+// ===== DEFAULT DATA (Fallback if JSON fails) =====
+const DEFAULT_CHARACTERS = [
+  { id: "duck", name: "Duck", icon: "images/characters/duck.png", fallbackEmoji: "🦆", support: 0 },
+  { id: "giraffe", name: "Giraffe", icon: "images/characters/giraffe.png", fallbackEmoji: "🦒", support: 0 },
+  { id: "penguin", name: "Penguin", icon: "images/characters/penguin.png", fallbackEmoji: "🐧", support: 0 },
+  { id: "zebra", name: "Zebra", icon: "images/characters/zebra.png", fallbackEmoji: "🦓", support: 0 },
+  { id: "bunny", name: "Bunny", icon: "images/characters/bunny.png", fallbackEmoji: "🐰", support: 0 },
+  { id: "chick", name: "Chick", icon: "images/characters/chick.png", fallbackEmoji: "🐥", support: 0 },
+  { id: "fox", name: "Fox", icon: "images/characters/fox.png", fallbackEmoji: "🦊", support: 0 },
+  { id: "elephant", name: "Elephant", icon: "images/characters/elephant.png", fallbackEmoji: "🐘", support: 0 },
+  { id: "pig", name: "Pig", icon: "images/characters/pig.png", fallbackEmoji: "🐷", support: 0 },
+  { id: "seal", name: "Seal", icon: "images/characters/seal.png", fallbackEmoji: "🦭", support: 0 },
+  { id: "mouse", name: "Mouse", icon: "images/characters/mouse.png", fallbackEmoji: "🐭", support: 0 },
+  { id: "lion", name: "Lion", icon: "images/characters/lion.png", fallbackEmoji: "🦁", support: 0 }
+];
+
+// ===== CHARACTER IMAGE COMPONENT =====
+function CharacterImage({ char, size = "80px" }) {
+  const [imgError, setImgError] = React.useState(false);
+
+  if (imgError || !char.icon) {
+    return <div style={{ fontSize: size === "120px" ? "80px" : "40px" }}>{char.fallbackEmoji || "🐾"}</div>;
   }
-];
 
-const CHARACTERS = [
-  { id: "A1", name: "Sal", title: "Union Boss", icon: "🚇" },
-  { id: "A2", name: "Keisha", title: "Councilwoman", icon: "🏛️" },
-  { id: "A4", name: "Robert", title: "Developer", icon: "⛪" },
-  { id: "B5", name: "Carlos", title: "Organizer", icon: "🍽️" },
-  { id: "B6", name: "Lily", title: "Mom", icon: "🏥" },
-  { id: "B7", name: "George", title: "Business", icon: "🍴" },
-  { id: "B8", name: "Sean", title: "Police", icon: "👮" },
-  { id: "C9", name: "Alex", title: "Activist", icon: "📦" },
-  { id: "C11", name: "Priya", title: "Tech", icon: "💻" },
-  { id: "D13", name: "Maria", title: "Climate", icon: "🌍" },
-  { id: "D14", name: "River", title: "Student", icon: "📱" },
-  { id: "A3", name: "Mike", title: "Worker", icon: "🔧" },
-  { id: "B4", name: "Sarah", title: "Teacher", icon: "📚" },
-  { id: "C10", name: "Jay", title: "Artist", icon: "🎨" },
-  { id: "D15", name: "Emma", title: "Nurse", icon: "💉" },
-  { id: "D16", name: "Tom", title: "Veteran", icon: "🎖️" }
-];
+  return (
+    <img 
+      src={char.icon} 
+      alt={char.name}
+      style={{ width: size, height: size, objectFit: "contain" }}
+      onError={() => setImgError(true)}
+    />
+  );
+}
 
-export default function DraggableGame() {
-  const [state, setState] = useState("MENU");
-  const [event, setEvent] = useState(0);
-  const [metrics, setMetrics] = useState({
-    treasury: 50, publicTrust: 50, intlReputation: 50, socialStability: 50
-  });
-  const [chars, setChars] = useState(CHARACTERS.map(c => ({ ...c, support: 0 })));
-  const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [hoveredOption, setHoveredOption] = useState(null);
-  const dragStartPos = useRef({ x: 0, y: 0 });
-
-  const start = () => {
-    setState("PLAY");
-    setEvent(0);
-    setMetrics({ treasury: 50, publicTrust: 50, intlReputation: 50, socialStability: 50 });
-    setChars(CHARACTERS.map(c => ({ ...c, support: 0 })));
+// ===== PIXEL BORDER DECORATION =====
+function PixelBorders() {
+  const blockStyle = {
+    position: "absolute",
+    background: "#ff9346",
+    width: "105px",
+    height: "40px"
   };
 
+  return (
+    <>
+      {/* Left side blocks */}
+      <div style={{ ...blockStyle, left: "89px", top: "0" }} />
+      <div style={{ ...blockStyle, left: "89px", top: "79px" }} />
+      <div style={{ ...blockStyle, left: "89px", top: "159px" }} />
+      <div style={{ ...blockStyle, left: "89px", top: "238px" }} />
+      
+      {/* Right side blocks */}
+      <div style={{ ...blockStyle, right: "89px", top: "0" }} />
+      <div style={{ ...blockStyle, right: "89px", top: "79px" }} />
+      <div style={{ ...blockStyle, right: "89px", top: "156px" }} />
+      <div style={{ ...blockStyle, right: "89px", top: "235px" }} />
+      
+      {/* Smaller connecting blocks */}
+      <div style={{ ...blockStyle, left: "105px", top: "40px", width: "72px", height: "39px" }} />
+      <div style={{ ...blockStyle, left: "105px", top: "119px", width: "72px" }} />
+      <div style={{ ...blockStyle, left: "105px", top: "199px", width: "72px", height: "39px" }} />
+      <div style={{ ...blockStyle, left: "105px", top: "278px", width: "72px" }} />
+      
+      <div style={{ ...blockStyle, right: "105px", top: "40px", width: "72px", height: "39px" }} />
+      <div style={{ ...blockStyle, right: "105px", top: "119px", width: "72px" }} />
+      <div style={{ ...blockStyle, right: "105px", top: "196px", width: "72px", height: "39px" }} />
+      <div style={{ ...blockStyle, right: "105px", top: "275px", width: "72px" }} />
+    </>
+  );
+}
+
+// ===== MAIN GAME COMPONENT =====
+function AnimalKingdomGame() {
+  // === State Management ===
+  const [currentState, setCurrentState] = React.useState(GAME_STATES.MENU);
+  const [currentEventIndex, setCurrentEventIndex] = React.useState(0);
+  const [metrics, setMetrics] = React.useState({
+    treasury: 50,
+    publicTrust: 50,
+    intlReputation: 50,
+    socialStability: 50
+  });
+  
+  const [characters, setCharacters] = React.useState([]);
+  const [events, setEvents] = React.useState([]);
+  const [dataLoaded, setDataLoaded] = React.useState(false);
+  
+  // Drag state
+  const [dragPos, setDragPos] = React.useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [hoveredOption, setHoveredOption] = React.useState(null);
+  const dragStartPos = React.useRef({ x: 0, y: 0 });
+
+  // === Load Data from JSON ===
+  React.useEffect(() => {
+    let eventsData = [];
+    let charactersData = DEFAULT_CHARACTERS;
+
+    // Load events
+    fetch('data/events.json')
+      .then(response => response.json())
+      .then(data => {
+        if (data.events && data.events.length > 0) {
+          eventsData = data.events;
+        }
+      })
+      .catch(() => console.log('Using default (events.json not found)'))
+      .finally(() => {
+        setEvents(eventsData);
+
+        // Load characters
+        fetch('data/characters.json')
+          .then(response => response.json())
+          .then(data => {
+            if (data.characters && data.characters.length > 0) {
+              charactersData = data.characters.map(c => ({ ...c, support: 0 }));
+            }
+          })
+          .catch(() => console.log('Using default characters'))
+          .finally(() => {
+            setCharacters(charactersData);
+            setDataLoaded(true);
+          });
+      });
+  }, []);
+
+  // === Drag Handlers ===
   const handleMouseDown = (e) => {
     setIsDragging(true);
     dragStartPos.current = { x: e.clientX, y: e.clientY };
@@ -298,9 +182,8 @@ export default function DraggableGame() {
     setIsDragging(false);
 
     if (Math.abs(dragPos.x) > 150) {
-      const option = dragPos.x < 0 ? EVENTS[event].optionA : EVENTS[event].optionB;
-      const label = dragPos.x < 0 ? "A" : "B";
-      choose(option, label);
+      const option = dragPos.x < 0 ? events[currentEventIndex].optionA : events[currentEventIndex].optionB;
+      handleDecision(option);
     }
 
     setDragPos({ x: 0, y: 0 });
@@ -311,331 +194,401 @@ export default function DraggableGame() {
     handleMouseUp();
   };
 
-  const choose = (opt, label) => {
+  // === Game Logic ===
+  const startGame = () => {
+    setCurrentState(GAME_STATES.PLAY);
+    setCurrentEventIndex(0);
+    setMetrics({ treasury: 50, publicTrust: 50, intlReputation: 50, socialStability: 50 });
+    setCharacters(characters.map(c => ({ ...c, support: 0 })));
+  };
+
+  const handleDecision = (option) => {
     const newM = { ...metrics };
-    Object.keys(opt.metricChanges).forEach(k => {
-      newM[k] = Math.max(0, Math.min(100, newM[k] + opt.metricChanges[k]));
+    Object.keys(option.metricChanges).forEach(key => {
+      newM[key] += option.metricChanges[key];
+      newM[key] = Math.max(0, Math.min(100, newM[key]));
     });
     
-    const newC = [...chars];
-    opt.characterImpacts.forEach(imp => {
-      const c = newC.find(x => x.id === imp.id);
-      if (c) {
-        c.support = Math.max(-100, Math.min(100, c.support + imp.change));
+    const newC = characters.map(char => {
+      const impact = option.characterImpacts.find(imp => imp.id === char.id);
+      if (impact) {
+        return {
+          ...char,
+          support: Math.max(-100, Math.min(100, char.support + impact.change))
+        };
       }
+      return char;
     });
     
     setMetrics(newM);
-    setChars(newC);
+    setCharacters(newC);
     
-    // Check game end conditions immediately
-    if (Object.values(newM).some(v => v <= 0)) {
-      setState("GAMEOVER");
-    } else if (event + 1 >= EVENTS.length) {
-      setState("RESULTS");
-    } else {
-      setEvent(event + 1);
-    }
+    // Check game end
+    setTimeout(() => {
+      if (Object.values(newM).some(v => v <= 0)) {
+        setCurrentState(GAME_STATES.GAME_OVER);
+      } else if (currentEventIndex + 1 >= events.length) {
+        setCurrentState(GAME_STATES.RESULTS);
+      } else {
+        setCurrentEventIndex(currentEventIndex + 1);
+      }
+    }, 300);
+  };
+
+  const returnToMenu = () => {
+    setCurrentState(GAME_STATES.MENU);
   };
 
   const getCharColor = (char) => {
-    if (!hoveredOption) return "#2a2a2a";
+    if (!hoveredOption) return "#fffdec";
     
-    const option = hoveredOption === "A" ? EVENTS[event].optionA : EVENTS[event].optionB;
+    const option = hoveredOption === "A" ? events[currentEventIndex].optionA : events[currentEventIndex].optionB;
     const impact = option.characterImpacts.find(imp => imp.id === char.id);
     
-    if (!impact) return "#2a2a2a";
-    if (impact.change > 0) return "#4a5f4a";
-    if (impact.change < 0) return "#5f3a3a";
-    return "#2a2a2a";
+    if (!impact) return "#fffdec";
+    if (impact.change > 0) return "#c8e6c9";
+    if (impact.change < 0) return "#ffcdd2";
+    return "#fffdec";
   };
 
-  if (state === "MENU") {
+  // === Loading ===
+  if (!dataLoaded) {
     return (
       <div style={{ 
-        background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', 
-        color: '#d4d4d4', 
-        fontFamily: '"Courier New", monospace', 
-        minHeight: '100vh', 
-        padding: '40px', 
-        textAlign: 'center' 
+        background: "#00bbb8", 
+        minHeight: "100vh", 
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: "24px",
+        color: "white",
+        fontWeight: "bold"
       }}>
-        <h1 style={{ fontSize: '36px', marginBottom: '20px', color: '#e8e8e8', fontWeight: 'normal', letterSpacing: '2px' }}>
-          NYC MAYOR
-        </h1>
-        <div style={{ maxWidth: '500px', margin: '0 auto', background: '#0f1419', padding: '30px', borderRadius: '4px', border: '1px solid #2a2a2a' }}>
-          <p style={{ fontSize: '16px', marginBottom: '20px', lineHeight: '1.8' }}>
-            Navigate 10 political events as NYC mayor. Drag cards left or right to make decisions.
-          </p>
-          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginBottom: '30px', fontSize: '14px', color: '#888' }}>
-            <div>← LEFT: Option A</div>
-            <div>RIGHT: Option B →</div>
+        Loading Animal Kingdom...
+      </div>
+    );
+  }
+
+  // === MENU ===
+  if (currentState === GAME_STATES.MENU) {
+    return (
+      <div style={{ background: "#00bbb8", minHeight: "100vh", padding: "40px", textAlign: "center", position: "relative" }}>
+        <PixelBorders />
+        
+        <div style={{ position: "relative", zIndex: 1, maxWidth: "700px", margin: "0 auto", paddingTop: "60px" }}>
+          <h1 style={{ fontSize: "56px", marginBottom: "30px", color: "#fff", fontWeight: "bold" }}>
+            🌍 ANIMAL KINGDOM
+          </h1>
+          <div style={{ background: "#fffdec", padding: "40px", borderRadius: "24px", marginBottom: "30px", boxShadow: "0 8px 20px rgba(0,0,0,0.15)" }}>
+            <p style={{ fontSize: "22px", marginBottom: "20px", lineHeight: "1.6", fontWeight: "bold", color: "#333" }}>
+              Lead the animal kingdom through {events.length} important decisions!
+            </p>
+            <p style={{ fontSize: "18px", color: "#666", marginBottom: "20px" }}>
+              Drag cards LEFT or RIGHT to choose
+            </p>
+            <p style={{ fontSize: "16px", color: "#999" }}>
+              Keep all metrics above zero to succeed
+            </p>
           </div>
-          <p style={{ marginBottom: '30px', color: '#666', fontSize: '13px' }}>
-            Keep all metrics above zero to survive
-          </p>
           <button 
-            onClick={start}
+            onClick={startGame}
             style={{ 
-              background: '#2a4a5a', 
-              border: '1px solid #3a5a6a', 
-              color: '#d4d4d4', 
-              padding: '12px 36px', 
-              fontSize: '16px', 
-              cursor: 'pointer',
-              fontFamily: '"Courier New", monospace',
-              letterSpacing: '1px',
-              transition: 'all 0.2s'
+              background: "#ff9346", 
+              border: "none", 
+              color: "#fff", 
+              padding: "18px 50px", 
+              fontSize: "24px", 
+              cursor: "pointer",
+              borderRadius: "20px",
+              fontWeight: "bold",
+              boxShadow: "0 6px 0 #d16a2e, 0 8px 20px rgba(0,0,0,0.2)",
+              transition: "transform 0.1s"
             }}
-            onMouseOver={(e) => e.target.style.background = '#3a5a6a'}
-            onMouseOut={(e) => e.target.style.background = '#2a4a5a'}
+            onMouseDown={(e) => e.target.style.transform = "translateY(4px)"}
+            onMouseUp={(e) => e.target.style.transform = "translateY(0)"}
           >
-            START
+            START GAME
           </button>
         </div>
       </div>
     );
   }
 
-  if (state === "PLAY") {
-    const ev = EVENTS[event];
-    const rotation = dragPos.x * 0.03;
+  // === PLAY ===
+  if (currentState === GAME_STATES.PLAY) {
+    const ev = events[currentEventIndex];
+    const rotation = dragPos.x * 0.02;
+    const mainChar = characters.find(c => c.id === ev.character);
 
     return (
       <div 
         style={{ 
-          background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', 
-          color: '#d4d4d4', 
-          fontFamily: '"Courier New", monospace', 
-          minHeight: '100vh', 
-          padding: '20px',
-          overflow: 'hidden',
-          userSelect: 'none'
+          background: "#00bbb8", 
+          minHeight: "100vh", 
+          padding: "20px",
+          overflow: "hidden",
+          userSelect: "none",
+          position: "relative"
         }}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Metrics */}
-        <div style={{ display: 'flex', gap: '12px', marginBottom: '20px', justifyContent: 'center' }}>
-          {Object.entries(metrics).map(([k, v]) => (
-            <div key={k} style={{ flex: 1, maxWidth: '140px' }}>
-              <div style={{ fontSize: '11px', marginBottom: '4px', color: '#666', letterSpacing: '0.5px' }}>
-                {k.toUpperCase()}
-              </div>
-              <div style={{ background: '#0f1419', height: '6px', borderRadius: '1px', border: '1px solid #1a1a1a' }}>
+        <PixelBorders />
+
+        <div style={{ position: "relative", zIndex: 1 }}>
+          {/* Metrics */}
+          <div style={{ display: "flex", gap: "15px", marginBottom: "20px", justifyContent: "center", paddingTop: "20px" }}>
+            {Object.entries(metrics).map(([k, v]) => (
+              <div key={k} style={{ flex: 1, maxWidth: "235px" }}>
                 <div style={{ 
-                  background: v < 25 ? '#9a5a5a' : '#5a6a5a', 
-                  height: '100%', 
-                  width: `${v}%`,
-                  borderRadius: '1px'
-                }} />
-              </div>
-              <div style={{ fontSize: '11px', marginTop: '3px', color: v < 25 ? '#9a5a5a' : '#7a8a7a' }}>
-                {Math.round(v)}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Main Layout: Options and Card */}
-        <div style={{ display: 'flex', gap: '20px', alignItems: 'center', justifyContent: 'center', marginBottom: '30px' }}>
-          
-          {/* Option A (Left) */}
-          <div style={{ 
-            background: hoveredOption === "A" ? 'rgba(80, 60, 60, 0.5)' : 'rgba(30, 30, 30, 0.4)',
-            border: hoveredOption === "A" ? '2px solid #8a6a6a' : '1px solid #3a3a3a',
-            padding: '20px', 
-            borderRadius: '4px',
-            transition: 'all 0.3s',
-            width: '200px',
-            minHeight: '120px'
-          }}>
-            <div style={{ fontSize: '11px', color: '#8a6a6a', fontWeight: 'bold', marginBottom: '8px', letterSpacing: '1px' }}>
-              ← OPTION A
-            </div>
-            <div style={{ fontSize: '13px', color: '#d4d4d4', lineHeight: '1.4' }}>{ev.optionA.text}</div>
-          </div>
-
-          {/* Event Card */}
-          <div 
-            style={{ 
-              background: '#0f1419',
-              border: '1px solid #3a3a3a',
-              borderRadius: '4px',
-              padding: '30px',
-              width: '400px',
-              cursor: isDragging ? 'grabbing' : 'grab',
-              transform: `translate(${dragPos.x}px, ${dragPos.y}px) rotate(${rotation}deg)`,
-              transition: isDragging ? 'none' : 'transform 0.3s ease',
-              boxShadow: isDragging ? '0 15px 30px rgba(0,0,0,0.6)' : '0 5px 15px rgba(0,0,0,0.3)',
-              touchAction: 'none'
-            }}
-            onMouseDown={handleMouseDown}
-            onTouchStart={handleTouchStart}
-          >
-            <div style={{ fontSize: '11px', color: '#666', marginBottom: '12px', letterSpacing: '1px' }}>
-              EVENT {event + 1} / {EVENTS.length}
-            </div>
-            <h2 style={{ fontSize: '18px', color: '#a8a8a8', marginBottom: '15px', fontWeight: 'normal' }}>
-              {ev.title}
-            </h2>
-            <p style={{ fontSize: '13px', color: '#888', lineHeight: '1.6' }}>{ev.description}</p>
-            <div style={{ marginTop: '20px', fontSize: '12px', color: '#555', textAlign: 'center', letterSpacing: '1px' }}>
-              ← DRAG TO DECIDE →
-            </div>
-          </div>
-
-          {/* Option B (Right) */}
-          <div style={{ 
-            background: hoveredOption === "B" ? 'rgba(60, 70, 80, 0.5)' : 'rgba(30, 30, 30, 0.4)',
-            border: hoveredOption === "B" ? '2px solid #6a7a8a' : '1px solid #3a3a3a',
-            padding: '20px', 
-            borderRadius: '4px',
-            transition: 'all 0.3s',
-            width: '200px',
-            minHeight: '120px'
-          }}>
-            <div style={{ fontSize: '11px', color: '#6a7a8a', fontWeight: 'bold', marginBottom: '8px', letterSpacing: '1px' }}>
-              OPTION B →
-            </div>
-            <div style={{ fontSize: '13px', color: '#d4d4d4', lineHeight: '1.4' }}>{ev.optionB.text}</div>
-          </div>
-        </div>
-
-        {/* Characters Grid */}
-        <div style={{ marginTop: '30px' }}>
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(8, 1fr)', 
-            gap: '6px',
-            maxWidth: '800px',
-            margin: '0 auto'
-          }}>
-            {chars.map(char => (
-              <div 
-                key={char.id}
-                style={{
-                  background: getCharColor(char),
-                  aspectRatio: '1',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '2px',
-                  fontSize: '22px',
-                  transition: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                  transform: hoveredOption && getCharColor(char) !== "#2a2a2a" ? 'scale(1.1)' : 'scale(1)',
-                  border: '1px solid #1a1a1a'
-                }}
-              >
-                <div>{char.icon}</div>
-                <div style={{ fontSize: '8px', marginTop: '3px', color: '#888' }}>{char.name}</div>
+                  background: "#277c38", 
+                  height: "36px", 
+                  borderRadius: "100px",
+                  position: "relative",
+                  border: "3px solid #fff"
+                }}>
+                  <div style={{ 
+                    background: "#c2ffce", 
+                    height: "100%", 
+                    width: `${v}%`,
+                    borderRadius: "100px",
+                    transition: "width 0.3s"
+                  }} />
+                  <div style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    color: "#277c38"
+                  }}>
+                    {Math.round(v)}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    );
-  }
 
-  if (state === "RESULTS") {
-    return (
-      <div style={{ 
-        background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', 
-        color: '#d4d4d4', 
-        fontFamily: '"Courier New", monospace', 
-        minHeight: '100vh', 
-        padding: '40px', 
-        textAlign: 'center' 
-      }}>
-        <h1 style={{ fontSize: '36px', marginBottom: '20px', color: '#7a8a7a', fontWeight: 'normal' }}>
-          TERM COMPLETE
-        </h1>
-        <p style={{ fontSize: '16px', marginBottom: '30px' }}>Survived all {EVENTS.length} events</p>
-        
-        <div style={{ 
-          maxWidth: '600px', 
-          margin: '0 auto', 
-          background: '#0f1419', 
-          padding: '30px', 
-          borderRadius: '4px',
-          border: '1px solid #2a2a2a'
-        }}>
-          <h3 style={{ color: '#6a6a6a', marginBottom: '20px', fontSize: '13px', letterSpacing: '1px' }}>
-            FINAL METRICS
-          </h3>
-          {Object.entries(metrics).map(([k, v]) => (
-            <p key={k} style={{ 
-              color: v < 50 ? '#9a8a6a' : '#7a8a7a', 
-              fontSize: '15px', 
-              marginBottom: '10px' 
+          {/* Main Layout */}
+          <div style={{ display: "flex", gap: "20px", alignItems: "center", justifyContent: "center", marginBottom: "30px", minHeight: "500px" }}>
+            
+            {/* Option A (Left) */}
+            <div style={{ 
+              background: hoveredOption === "A" ? "#ff6b4d" : "#ff9346",
+              padding: "40px 20px", 
+              borderRadius: "20px",
+              transition: "all 0.3s",
+              width: "185px",
+              minHeight: "239px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transform: hoveredOption === "A" ? "scale(1.05)" : "scale(1)",
+              boxShadow: hoveredOption === "A" ? "0 8px 0 #d14a2e" : "0 6px 0 #d16a2e",
+              cursor: "pointer"
+            }}
+            onClick={() => !isDragging && handleDecision(ev.optionA)}
+            >
+              <p style={{ fontSize: "32px", color: "#fff", fontWeight: "bold", textAlign: "center", lineHeight: "normal" }}>
+                {ev.optionA.text}
+              </p>
+            </div>
+
+            {/* Event Card */}
+            <div 
+              style={{ 
+                background: "#0063dc",
+                borderRadius: "40px",
+                padding: "60px 80px",
+                cursor: isDragging ? "grabbing" : "grab",
+                transform: `translate(${dragPos.x}px, ${dragPos.y}px) rotate(${rotation}deg)`,
+                transition: isDragging ? "none" : "transform 0.3s ease",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+                touchAction: "none",
+                display: "flex",
+                gap: "40px",
+                alignItems: "center",
+                maxWidth: "900px"
+              }}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleTouchStart}
+            >
+              {mainChar && <CharacterImage char={mainChar} size="120px" />}
+              
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: "40px", color: "#fff", marginBottom: "40px", fontWeight: "bold", lineHeight: "normal" }}>
+                  {ev.description}
+                </p>
+                <p style={{ fontSize: "32px", color: "#94ff62", fontWeight: "bold" }}>
+                  {ev.characterName}
+                </p>
+              </div>
+            </div>
+
+            {/* Option B (Right) */}
+            <div style={{ 
+              background: hoveredOption === "B" ? "#ff6b4d" : "#ff9346",
+              padding: "40px 20px", 
+              borderRadius: "20px",
+              transition: "all 0.3s",
+              width: "185px",
+              minHeight: "239px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transform: hoveredOption === "B" ? "scale(1.05)" : "scale(1)",
+              boxShadow: hoveredOption === "B" ? "0 8px 0 #d14a2e" : "0 6px 0 #d16a2e",
+              cursor: "pointer"
+            }}
+            onClick={() => !isDragging && handleDecision(ev.optionB)}
+            >
+              <p style={{ fontSize: "32px", color: "#fff", fontWeight: "bold", textAlign: "center", lineHeight: "normal" }}>
+                {ev.optionB.text}
+              </p>
+            </div>
+          </div>
+
+          {/* Characters Grid */}
+          <div style={{ marginTop: "30px" }}>
+            <div style={{ 
+              display: "grid", 
+              gridTemplateColumns: "repeat(6, 1fr)", 
+              gap: "12px",
+              maxWidth: "1000px",
+              margin: "0 auto"
             }}>
-              {k}: {Math.round(v)}
-            </p>
-          ))}
+              {characters.map(char => (
+                <div 
+                  key={char.id}
+                  style={{
+                    background: getCharColor(char),
+                    aspectRatio: "1",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "20px",
+                    transition: "all 0.3s",
+                    transform: hoveredOption && getCharColor(char) !== "#fffdec" ? "scale(1.15)" : "scale(1)",
+                    border: "4px solid #fff",
+                    boxShadow: "0 4px 10px rgba(0,0,0,0.15)"
+                  }}
+                >
+                  <CharacterImage char={char} size="80px" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-
-        <button 
-          onClick={() => setState("MENU")}
-          style={{ 
-            background: '#2a4a5a', 
-            border: '1px solid #3a5a6a', 
-            color: '#d4d4d4', 
-            padding: '12px 36px', 
-            fontSize: '16px', 
-            cursor: 'pointer',
-            marginTop: '40px',
-            fontFamily: '"Courier New", monospace',
-            letterSpacing: '1px'
-          }}
-        >
-          RETURN TO MENU
-        </button>
       </div>
     );
   }
 
-  if (state === "GAMEOVER") {
+  // === RESULTS ===
+  if (currentState === GAME_STATES.RESULTS) {
+    return (
+      <div style={{ background: "#00bbb8", minHeight: "100vh", padding: "40px", textAlign: "center", position: "relative" }}>
+        <PixelBorders />
+        
+        <div style={{ position: "relative", zIndex: 1, paddingTop: "60px" }}>
+          <h1 style={{ fontSize: "48px", marginBottom: "20px", color: "#fff", fontWeight: "bold" }}>
+            🎉 SUCCESS! 🎉
+          </h1>
+          <p style={{ fontSize: "24px", marginBottom: "30px", color: "#fff" }}>
+            You led the kingdom through all {events.length} events!
+          </p>
+          
+          <div style={{ 
+            maxWidth: "600px", 
+            margin: "0 auto 30px", 
+            background: "#fffdec", 
+            padding: "40px", 
+            borderRadius: "24px",
+            boxShadow: "0 8px 20px rgba(0,0,0,0.15)"
+          }}>
+            <h3 style={{ color: "#333", marginBottom: "20px", fontSize: "22px", fontWeight: "bold" }}>
+              FINAL SCORES
+            </h3>
+            {Object.entries(metrics).map(([k, v]) => (
+              <p key={k} style={{ 
+                color: v < 50 ? "#ff9346" : "#277c38", 
+                fontSize: "20px", 
+                marginBottom: "10px",
+                fontWeight: "bold",
+                textTransform: "capitalize"
+              }}>
+                {k}: {Math.round(v)}/100
+              </p>
+            ))}
+          </div>
+
+          <button 
+            onClick={returnToMenu}
+            style={{ 
+              background: "#ff9346", 
+              border: "none", 
+              color: "#fff", 
+              padding: "18px 50px", 
+              fontSize: "24px", 
+              cursor: "pointer",
+              borderRadius: "20px",
+              fontWeight: "bold",
+              boxShadow: "0 6px 0 #d16a2e, 0 8px 20px rgba(0,0,0,0.2)"
+            }}
+          >
+            PLAY AGAIN
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // === GAME OVER ===
+  if (currentState === GAME_STATES.GAME_OVER) {
     const reason = metrics.treasury <= 0 ? "BANKRUPTCY" :
                    metrics.publicTrust <= 0 ? "NO CONFIDENCE" :
                    metrics.intlReputation <= 0 ? "INTERNATIONAL CRISIS" : "CIVIL UNREST";
     return (
-      <div style={{ 
-        background: 'linear-gradient(135deg, #2e1a1a 0%, #3e1616 100%)', 
-        color: '#d4a4a4', 
-        fontFamily: '"Courier New", monospace', 
-        minHeight: '100vh', 
-        padding: '40px', 
-        textAlign: 'center' 
-      }}>
-        <h1 style={{ fontSize: '36px', marginBottom: '20px', color: '#c4a4a4', fontWeight: 'normal' }}>
-          TERM ENDED
-        </h1>
-        <h2 style={{ color: '#9a7a7a', fontSize: '24px', marginBottom: '20px', fontWeight: 'normal' }}>
-          {reason}
-        </h2>
-        <p style={{ color: '#888', fontSize: '15px', marginBottom: '30px' }}>
-          Survived {event} of {EVENTS.length} events
-        </p>
+      <div style={{ background: "#00bbb8", minHeight: "100vh", padding: "40px", textAlign: "center", position: "relative" }}>
+        <PixelBorders />
         
-        <button 
-          onClick={() => setState("MENU")}
-          style={{ 
-            background: '#5a3a3a', 
-            border: '1px solid #6a4a4a', 
-            color: '#d4d4d4', 
-            padding: '12px 36px', 
-            fontSize: '16px', 
-            cursor: 'pointer',
-            fontFamily: '"Courier New", monospace',
-            letterSpacing: '1px'
-          }}
-        >
-          TRY AGAIN
-        </button>
+        <div style={{ position: "relative", zIndex: 1, paddingTop: "60px" }}>
+          <h1 style={{ fontSize: "48px", marginBottom: "20px", color: "#fff", fontWeight: "bold" }}>
+            😢 GAME OVER
+          </h1>
+          <h2 style={{ color: "#ffe5b4", fontSize: "32px", marginBottom: "20px", fontWeight: "bold" }}>
+            {reason}
+          </h2>
+          <p style={{ color: "#fff", fontSize: "20px", marginBottom: "30px" }}>
+            You survived {currentEventIndex} of {events.length} events
+          </p>
+          
+          <button 
+            onClick={returnToMenu}
+            style={{ 
+              background: "#ff9346", 
+              border: "none", 
+              color: "#fff", 
+              padding: "18px 50px", 
+              fontSize: "24px", 
+              cursor: "pointer",
+              borderRadius: "20px",
+              fontWeight: "bold",
+              boxShadow: "0 6px 0 #d16a2e"
+            }}
+          >
+            TRY AGAIN
+          </button>
+        </div>
       </div>
     );
   }
+
+  return null;
 }
+
+// ===== RENDER =====
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<AnimalKingdomGame />);

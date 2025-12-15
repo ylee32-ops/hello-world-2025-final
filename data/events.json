@@ -2,182 +2,405 @@
   "events": [
     {
       "id": 1,
-      "title": "Minimum Wage Increase to $20/hour",
-      "description": "City Council proposes raising minimum wage from $15 to $20. Workers can't afford rent. Small businesses warn of closures.",
-      "category": "economic",
+      "title": "Fossil Fuel Ban",
+      "description": "We TOTALLY need to keep fossil fuels in the ground: ban fracking, ban offshore drilling.",
+      "character": "giraffe",
+      "characterName": "Environmentalist",
+      "category": "environment",
       "optionA": {
-        "text": "SUPPORT: Raise to $20",
-        "shortLabel": "Support",
+        "text": "No, it has to be gradual",
         "metricChanges": {
           "treasury": -10,
-          "publicTrust": 15,
-          "intlReputation": 5,
-          "socialStability": 10
+          "publicTrust": 10,
+          "intlReputation": -15,
+          "socialStability": 5
         },
         "characterImpacts": [
-          { "id": "B5", "change": 20 },
-          { "id": "C9", "change": 18 },
-          { "id": "A1", "change": 12 },
-          { "id": "A2", "change": 15 },
-          { "id": "B7", "change": -15 },
-          { "id": "A4", "change": -20 }
+          { "id": "giraffe", "change": -30 },
+          { "id": "penguin", "change": -25 },
+          { "id": "chick", "change": -20 },
+          { "id": "fox", "change": 20 },
+          { "id": "elephant", "change": 15 },
+          { "id": "lion", "change": 18 }
         ]
       },
       "optionB": {
-        "text": "OPPOSE: Keep at $15",
-        "shortLabel": "Oppose",
+        "text": "Ban and Ban",
         "metricChanges": {
-          "treasury": 8,
-          "publicTrust": -12,
-          "intlReputation": -3,
-          "socialStability": -8
+          "treasury": 20,
+          "publicTrust": -20,
+          "intlReputation": 25,
+          "socialStability": -15
         },
         "characterImpacts": [
-          { "id": "B7", "change": 18 },
-          { "id": "A4", "change": 20 },
-          { "id": "C11", "change": 10 },
-          { "id": "B5", "change": -20 },
-          { "id": "C9", "change": -18 },
-          { "id": "A1", "change": -12 }
+          { "id": "giraffe", "change": 35 },
+          { "id": "penguin", "change": 30 },
+          { "id": "chick", "change": 25 },
+          { "id": "fox", "change": -25 },
+          { "id": "elephant", "change": -20 },
+          { "id": "lion", "change": -22 }
         ]
       }
     },
     {
       "id": 2,
-      "title": "Police Budget: Cut 50%?",
-      "description": "Activists demand 'Defund the Police' - cut budget by 50%. Police union warns crime will surge and officers will quit.",
-      "category": "justice",
+      "title": "Tree Planting Initiative",
+      "description": "Plant 1 million trees across the land! We need more habitat for everyone.",
+      "character": "elephant",
+      "characterName": "Forest Guardian",
+      "category": "environment",
       "optionA": {
-        "text": "CUT: Reduce budget by 50%",
-        "shortLabel": "Cut",
+        "text": "Too expensive, plant less",
         "metricChanges": {
-          "treasury": 20,
-          "publicTrust": -15,
-          "intlReputation": 10,
-          "socialStability": -20
+          "treasury": 5,
+          "publicTrust": 5,
+          "intlReputation": -10,
+          "socialStability": 5
         },
         "characterImpacts": [
-          { "id": "C9", "change": 25 },
-          { "id": "D13", "change": 22 },
-          { "id": "A2", "change": 15 },
-          { "id": "C10", "change": 18 },
-          { "id": "B8", "change": -30 },
-          { "id": "A1", "change": -12 },
-          { "id": "B6", "change": -10 },
-          { "id": "A3", "change": -15 }
+          { "id": "elephant", "change": -25 },
+          { "id": "bunny", "change": -20 },
+          { "id": "mouse", "change": -15 },
+          { "id": "zebra", "change": 15 },
+          { "id": "pig", "change": 10 }
         ]
       },
       "optionB": {
-        "text": "MAINTAIN: Keep current funding",
-        "shortLabel": "Maintain",
+        "text": "Yes! 1 million trees",
         "metricChanges": {
-          "treasury": -12,
-          "publicTrust": 8,
-          "intlReputation": -5,
-          "socialStability": 15
+          "treasury": 25,
+          "publicTrust": 15,
+          "intlReputation": 20,
+          "socialStability": -15
         },
         "characterImpacts": [
-          { "id": "B8", "change": 25 },
-          { "id": "A1", "change": 12 },
-          { "id": "A3", "change": 20 },
-          { "id": "B6", "change": 15 },
-          { "id": "C9", "change": -25 },
-          { "id": "D13", "change": -22 },
-          { "id": "A2", "change": -10 },
-          { "id": "C10", "change": -15 }
+          { "id": "elephant", "change": 30 },
+          { "id": "bunny", "change": 25 },
+          { "id": "mouse", "change": 22 },
+          { "id": "zebra", "change": -18 },
+          { "id": "pig", "change": -15 }
         ]
       }
     },
     {
       "id": 3,
-      "title": "Amazon HQ2: Tax Breaks or No Deal?",
-      "description": "Amazon wants $3B in tax breaks for Queens HQ. Promises 25,000 jobs but locals call it corporate welfare.",
-      "category": "economic",
+      "title": "Water Rationing",
+      "description": "Drought season is here! Limit water usage to 50 gallons per animal per day.",
+      "character": "penguin",
+      "characterName": "Conservation Leader",
+      "category": "resources",
       "optionA": {
-        "text": "YES: Give Amazon the tax breaks",
-        "shortLabel": "Yes",
+        "text": "No limits, freedom!",
         "metricChanges": {
-          "treasury": -15,
-          "publicTrust": -10,
-          "intlReputation": 15,
+          "treasury": -20,
+          "publicTrust": -15,
+          "intlReputation": 10,
           "socialStability": 5
         },
         "characterImpacts": [
-          { "id": "A4", "change": 20 },
-          { "id": "C11", "change": 18 },
-          { "id": "B7", "change": 12 },
-          { "id": "C12", "change": 15 },
-          { "id": "C9", "change": -20 },
-          { "id": "A2", "change": -15 },
-          { "id": "B5", "change": -12 },
-          { "id": "D13", "change": -18 }
+          { "id": "penguin", "change": -35 },
+          { "id": "seal", "change": -30 },
+          { "id": "duck", "change": -25 },
+          { "id": "lion", "change": 25 },
+          { "id": "zebra", "change": 20 }
         ]
       },
       "optionB": {
-        "text": "NO: Reject Amazon's demands",
-        "shortLabel": "No",
+        "text": "Ration water strictly",
         "metricChanges": {
-          "treasury": 5,
-          "publicTrust": 8,
-          "intlReputation": -12,
-          "socialStability": -5
+          "treasury": 20,
+          "publicTrust": 10,
+          "intlReputation": -15,
+          "socialStability": 10
         },
         "characterImpacts": [
-          { "id": "C9", "change": 22 },
-          { "id": "A2", "change": 18 },
-          { "id": "B5", "change": 15 },
-          { "id": "D13", "change": 20 },
-          { "id": "A4", "change": -22 },
-          { "id": "C11", "change": -20 },
-          { "id": "B7", "change": -10 },
-          { "id": "C12", "change": -15 }
+          { "id": "penguin", "change": 35 },
+          { "id": "seal", "change": 30 },
+          { "id": "duck", "change": 25 },
+          { "id": "lion", "change": -20 },
+          { "id": "zebra", "change": -18 }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "Hunting Season",
+      "description": "Population of deer is too high! Open hunting season for 3 months to control numbers.",
+      "character": "fox",
+      "characterName": "Hunter",
+      "category": "wildlife",
+      "optionA": {
+        "text": "No hunting, protect all",
+        "metricChanges": {
+          "treasury": -15,
+          "publicTrust": -20,
+          "intlReputation": 15,
+          "socialStability": 20
+        },
+        "characterImpacts": [
+          { "id": "fox", "change": -30 },
+          { "id": "lion", "change": -25 },
+          { "id": "bunny", "change": 30 },
+          { "id": "mouse", "change": 25 },
+          { "id": "duck", "change": 22 }
+        ]
+      },
+      "optionB": {
+        "text": "Open hunting season",
+        "metricChanges": {
+          "treasury": 15,
+          "publicTrust": 20,
+          "intlReputation": -15,
+          "socialStability": -20
+        },
+        "characterImpacts": [
+          { "id": "fox", "change": 30 },
+          { "id": "lion", "change": 25 },
+          { "id": "bunny", "change": -30 },
+          { "id": "mouse", "change": -25 },
+          { "id": "duck", "change": -22 }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Tourism Development",
+      "description": "Build safari parks and hotels! Bring in tourists for economic growth and jobs.",
+      "character": "zebra",
+      "characterName": "Business Owner",
+      "category": "economic",
+      "optionA": {
+        "text": "Build big resorts",
+        "metricChanges": {
+          "treasury": -25,
+          "publicTrust": 20,
+          "intlReputation": -10,
+          "socialStability": 25
+        },
+        "characterImpacts": [
+          { "id": "zebra", "change": 30 },
+          { "id": "pig", "change": 25 },
+          { "id": "lion", "change": 22 },
+          { "id": "giraffe", "change": -30 },
+          { "id": "elephant", "change": -25 }
+        ]
+      },
+      "optionB": {
+        "text": "Eco-tourism only",
+        "metricChanges": {
+          "treasury": 10,
+          "publicTrust": 10,
+          "intlReputation": 15,
+          "socialStability": 10
+        },
+        "characterImpacts": [
+          { "id": "giraffe", "change": 25 },
+          { "id": "elephant", "change": 22 },
+          { "id": "penguin", "change": 20 },
+          { "id": "zebra", "change": -18 },
+          { "id": "pig", "change": -15 }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Food Distribution",
+      "description": "Some areas have too much food, others are starving. Redistribute resources equally?",
+      "character": "pig",
+      "characterName": "Farmer",
+      "category": "economic",
+      "optionA": {
+        "text": "Free market decides",
+        "metricChanges": {
+          "treasury": 0,
+          "publicTrust": -15,
+          "intlReputation": -20,
+          "socialStability": -15
+        },
+        "characterImpacts": [
+          { "id": "pig", "change": 25 },
+          { "id": "lion", "change": 22 },
+          { "id": "fox", "change": 20 },
+          { "id": "bunny", "change": -30 },
+          { "id": "mouse", "change": -28 }
+        ]
+      },
+      "optionB": {
+        "text": "Equal distribution",
+        "metricChanges": {
+          "treasury": 0,
+          "publicTrust": 20,
+          "intlReputation": 25,
+          "socialStability": 15
+        },
+        "characterImpacts": [
+          { "id": "bunny", "change": 30 },
+          { "id": "mouse", "change": 28 },
+          { "id": "chick", "change": 25 },
+          { "id": "pig", "change": -22 },
+          { "id": "lion", "change": -20 }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "title": "Predator Protection",
+      "description": "Lions and foxes are endangered! Create protected zones where they can hunt freely.",
+      "character": "lion",
+      "characterName": "Predator Leader",
+      "category": "wildlife",
+      "optionA": {
+        "text": "No protection zones",
+        "metricChanges": {
+          "treasury": -10,
+          "publicTrust": 5,
+          "intlReputation": -15,
+          "socialStability": 10
+        },
+        "characterImpacts": [
+          { "id": "lion", "change": -35 },
+          { "id": "fox", "change": -30 },
+          { "id": "bunny", "change": 30 },
+          { "id": "duck", "change": 25 },
+          { "id": "mouse", "change": 28 }
+        ]
+      },
+      "optionB": {
+        "text": "Create safe zones",
+        "metricChanges": {
+          "treasury": 15,
+          "publicTrust": -15,
+          "intlReputation": 10,
+          "socialStability": -15
+        },
+        "characterImpacts": [
+          { "id": "lion", "change": 35 },
+          { "id": "fox", "change": 30 },
+          { "id": "bunny", "change": -30 },
+          { "id": "duck", "change": -25 },
+          { "id": "mouse", "change": -28 }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "title": "Plastic Ban",
+      "description": "Ban all single-use plastics immediately! Ocean animals are dying from pollution.",
+      "character": "seal",
+      "characterName": "Ocean Protector",
+      "category": "environment",
+      "optionA": {
+        "text": "Phase out slowly",
+        "metricChanges": {
+          "treasury": -15,
+          "publicTrust": 0,
+          "intlReputation": -15,
+          "socialStability": 5
+        },
+        "characterImpacts": [
+          { "id": "seal", "change": -30 },
+          { "id": "penguin", "change": -25 },
+          { "id": "duck", "change": -22 },
+          { "id": "pig", "change": 20 },
+          { "id": "zebra", "change": 18 }
+        ]
+      },
+      "optionB": {
+        "text": "Ban immediately",
+        "metricChanges": {
+          "treasury": 25,
+          "publicTrust": -10,
+          "intlReputation": 20,
+          "socialStability": 15
+        },
+        "characterImpacts": [
+          { "id": "seal", "change": 35 },
+          { "id": "penguin", "change": 30 },
+          { "id": "duck", "change": 28 },
+          { "id": "pig", "change": -25 },
+          { "id": "zebra", "change": -20 }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "title": "Migration Routes",
+      "description": "Close roads during migration season! Birds and animals need safe passage.",
+      "character": "duck",
+      "characterName": "Water Guardian",
+      "category": "wildlife",
+      "optionA": {
+        "text": "Keep roads open",
+        "metricChanges": {
+          "treasury": -20,
+          "publicTrust": 10,
+          "intlReputation": 5,
+          "socialStability": -15
+        },
+        "characterImpacts": [
+          { "id": "duck", "change": -35 },
+          { "id": "chick", "change": -30 },
+          { "id": "bunny", "change": -25 },
+          { "id": "zebra", "change": 25 },
+          { "id": "pig", "change": 22 }
+        ]
+      },
+      "optionB": {
+        "text": "Close roads seasonally",
+        "metricChanges": {
+          "treasury": 20,
+          "publicTrust": -10,
+          "intlReputation": -10,
+          "socialStability": 20
+        },
+        "characterImpacts": [
+          { "id": "duck", "change": 35 },
+          { "id": "chick", "change": 30 },
+          { "id": "bunny", "change": 28 },
+          { "id": "zebra", "change": -22 },
+          { "id": "pig", "change": -20 }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "title": "Sanctuary Expansion",
+      "description": "Double the size of protected sanctuaries! Small animals need more safe spaces.",
+      "character": "bunny",
+      "characterName": "Activist",
+      "category": "wildlife",
+      "optionA": {
+        "text": "Too expensive, no",
+        "metricChanges": {
+          "treasury": -15,
+          "publicTrust": 15,
+          "intlReputation": -20,
+          "socialStability": 5
+        },
+        "characterImpacts": [
+          { "id": "bunny", "change": -35 },
+          { "id": "mouse", "change": -33 },
+          { "id": "chick", "change": -30 },
+          { "id": "lion", "change": 20 },
+          { "id": "zebra", "change": 18 }
+        ]
+      },
+      "optionB": {
+        "text": "Expand sanctuaries",
+        "metricChanges": {
+          "treasury": 30,
+          "publicTrust": -20,
+          "intlReputation": 25,
+          "socialStability": 20
+        },
+        "characterImpacts": [
+          { "id": "bunny", "change": 40 },
+          { "id": "mouse", "change": 35 },
+          { "id": "chick", "change": 33 },
+          { "id": "lion", "change": -20 },
+          { "id": "zebra", "change": -22 }
         ]
       }
     }
-  ],
-  "_template": {
-    "id": 0,
-    "title": "Event Title",
-    "description": "Event description explaining the dilemma",
-    "category": "economic|justice|housing|environment|infrastructure|health",
-    "optionA": {
-      "text": "Full text description of option A",
-      "shortLabel": "Short label",
-      "metricChanges": {
-        "treasury": 0,
-        "publicTrust": 0,
-        "intlReputation": 0,
-        "socialStability": 0
-      },
-      "characterImpacts": [
-        { "id": "A1", "change": 0 }
-      ]
-    },
-    "optionB": {
-      "text": "Full text description of option B",
-      "shortLabel": "Short label",
-      "metricChanges": {
-        "treasury": 0,
-        "publicTrust": 0,
-        "intlReputation": 0,
-        "socialStability": 0
-      },
-      "characterImpacts": [
-        { "id": "A1", "change": 0 }
-      ]
-    }
-  },
-  "_notes": {
-    "totalEvents": 32,
-    "completed": 3,
-    "remaining": 29,
-    "categories": [
-      "economic (wealth, taxes, business)",
-      "justice (police, crime, courts)",
-      "housing (rent, homelessness, development)",
-      "environment (climate, pollution, green energy)",
-      "infrastructure (transit, roads, utilities)",
-      "health (healthcare, COVID, mental health)"
-    ]
-  }
+  ]
 }

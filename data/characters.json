@@ -1,323 +1,99 @@
 {
   "characters": [
     {
-      "id": "A1",
-      "name": "Sal",
-      "fullName": "Sal Benedetti",
-      "title": "Old-School Union Boss",
-      "age": 65,
-      "demographics": {
-        "ethnicity": "Italian-American",
-        "gender": "Male",
-        "borough": "Brooklyn"
-      },
-      "position": {
-        "economic": -2,
-        "authority": 2
-      },
-      "population": 0.06,
-      "influenceWeight": 0.9,
-      "icon": "🚇",
+      "id": "duck",
+      "name": "Duck",
+      "title": "Water Guardian",
+      "icon": "images/characters/duck.png",
+      "fallbackEmoji": "🦆",
       "support": 0
     },
     {
-      "id": "A2",
-      "name": "Keisha",
-      "fullName": "Keisha Washington",
-      "title": "Black Progressive Councilwoman",
-      "age": 42,
-      "demographics": {
-        "ethnicity": "African-American",
-        "gender": "Female",
-        "borough": "Harlem"
-      },
-      "position": {
-        "economic": -1,
-        "authority": 2
-      },
-      "population": 0.06,
-      "influenceWeight": 0.9,
-      "icon": "🏛️",
+      "id": "giraffe",
+      "name": "Giraffe",
+      "title": "Environmentalist",
+      "icon": "images/characters/giraffe.png",
+      "fallbackEmoji": "🦒",
       "support": 0
     },
     {
-      "id": "A3",
-      "name": "Mike",
-      "fullName": "Mike O'Brien",
-      "title": "Irish Catholic Firefighter",
-      "age": 48,
-      "demographics": {
-        "ethnicity": "Irish-American",
-        "gender": "Male",
-        "borough": "Queens"
-      },
-      "position": {
-        "economic": 0,
-        "authority": 2
-      },
-      "population": 0.05,
-      "influenceWeight": 0.8,
-      "icon": "🚒",
+      "id": "penguin",
+      "name": "Penguin",
+      "title": "Conservation Leader",
+      "icon": "images/characters/penguin.png",
+      "fallbackEmoji": "🐧",
       "support": 0
     },
     {
-      "id": "A4",
-      "name": "Robert",
-      "fullName": "Robert Harrison III",
-      "title": "Evangelical Real Estate Developer",
-      "age": 55,
-      "demographics": {
-        "ethnicity": "White",
-        "gender": "Male",
-        "borough": "Staten Island"
-      },
-      "position": {
-        "economic": 2,
-        "authority": 2
-      },
-      "population": 0.05,
-      "influenceWeight": 0.8,
-      "icon": "⛪",
+      "id": "zebra",
+      "name": "Zebra",
+      "title": "Business Owner",
+      "icon": "images/characters/zebra.png",
+      "fallbackEmoji": "🦓",
       "support": 0
     },
     {
-      "id": "B5",
-      "name": "Carlos",
-      "fullName": "Carlos Mendoza",
-      "title": "Latino Restaurant Union Organizer",
-      "age": 38,
-      "demographics": {
-        "ethnicity": "Latino",
-        "gender": "Male",
-        "borough": "Bronx"
-      },
-      "position": {
-        "economic": -2,
-        "authority": 1
-      },
-      "population": 0.07,
-      "influenceWeight": 1.0,
-      "icon": "🍽️",
+      "id": "bunny",
+      "name": "Bunny",
+      "title": "Activist",
+      "icon": "images/characters/bunny.png",
+      "fallbackEmoji": "🐰",
       "support": 0
     },
     {
-      "id": "B6",
-      "name": "Lily",
-      "fullName": "Lily Chen",
-      "title": "Suburban Asian-American Professional Mom",
-      "age": 42,
-      "demographics": {
-        "ethnicity": "Asian-American",
-        "gender": "Female",
-        "borough": "Queens"
-      },
-      "position": {
-        "economic": -1,
-        "authority": 1
-      },
-      "population": 0.08,
-      "influenceWeight": 1.2,
-      "icon": "🏥",
+      "id": "chick",
+      "name": "Chick",
+      "title": "Youth Representative",
+      "icon": "images/characters/chick.png",
+      "fallbackEmoji": "🐥",
       "support": 0
     },
     {
-      "id": "B7",
-      "name": "George",
-      "fullName": "George Pappas",
-      "title": "Greek Small Business Owner",
-      "age": 52,
-      "demographics": {
-        "ethnicity": "Greek-American",
-        "gender": "Male",
-        "borough": "Queens"
-      },
-      "position": {
-        "economic": 1,
-        "authority": 1
-      },
-      "population": 0.07,
-      "influenceWeight": 1.0,
-      "icon": "🍴",
+      "id": "fox",
+      "name": "Fox",
+      "title": "Hunter",
+      "icon": "images/characters/fox.png",
+      "fallbackEmoji": "🦊",
       "support": 0
     },
     {
-      "id": "B8",
-      "name": "Sean",
-      "fullName": "Sean Murphy",
-      "title": "Police Union Member",
-      "age": 40,
-      "demographics": {
-        "ethnicity": "Irish-American",
-        "gender": "Male",
-        "borough": "Brooklyn"
-      },
-      "position": {
-        "economic": 2,
-        "authority": 1
-      },
-      "population": 0.05,
-      "influenceWeight": 0.8,
-      "icon": "👮",
+      "id": "elephant",
+      "name": "Elephant",
+      "title": "Forest Guardian",
+      "icon": "images/characters/elephant.png",
+      "fallbackEmoji": "🐘",
       "support": 0
     },
     {
-      "id": "C9",
-      "name": "Alex",
-      "fullName": "Alex Rivera",
-      "title": "Working-Class Queer Activist",
-      "age": 28,
-      "demographics": {
-        "ethnicity": "Latino",
-        "gender": "Non-binary",
-        "borough": "Brooklyn"
-      },
-      "position": {
-        "economic": -2,
-        "authority": -1
-      },
-      "population": 0.07,
-      "influenceWeight": 1.0,
-      "icon": "📦",
+      "id": "pig",
+      "name": "Pig",
+      "title": "Farmer",
+      "icon": "images/characters/pig.png",
+      "fallbackEmoji": "🐷",
       "support": 0
     },
     {
-      "id": "C10",
-      "name": "Jay",
-      "fullName": "Jay Thompson",
-      "title": "Black Artist / Creative",
-      "age": 33,
-      "demographics": {
-        "ethnicity": "African-American",
-        "gender": "Male",
-        "borough": "Brooklyn"
-      },
-      "position": {
-        "economic": -1,
-        "authority": -1
-      },
-      "population": 0.04,
-      "influenceWeight": 0.7,
-      "icon": "🎨",
+      "id": "seal",
+      "name": "Seal",
+      "title": "Ocean Protector",
+      "icon": "images/characters/seal.png",
+      "fallbackEmoji": "🦭",
       "support": 0
     },
     {
-      "id": "C11",
-      "name": "Priya",
-      "fullName": "Priya Sharma",
-      "title": "Tech Worker",
-      "age": 31,
-      "demographics": {
-        "ethnicity": "South Asian",
-        "gender": "Female",
-        "borough": "Manhattan"
-      },
-      "position": {
-        "economic": 1,
-        "authority": -1
-      },
-      "population": 0.08,
-      "influenceWeight": 1.2,
-      "icon": "💻",
+      "id": "mouse",
+      "name": "Mouse",
+      "title": "Small Community Rep",
+      "icon": "images/characters/mouse.png",
+      "fallbackEmoji": "🐭",
       "support": 0
     },
     {
-      "id": "C12",
-      "name": "David",
-      "fullName": "David Cohen",
-      "title": "Jewish Progressive Professional",
-      "age": 45,
-      "demographics": {
-        "ethnicity": "Jewish",
-        "gender": "Male",
-        "borough": "Manhattan"
-      },
-      "position": {
-        "economic": 2,
-        "authority": -1
-      },
-      "population": 0.06,
-      "influenceWeight": 0.9,
-      "icon": "💼",
-      "support": 0
-    },
-    {
-      "id": "D13",
-      "name": "Maria",
-      "fullName": "Maria Gonzalez",
-      "title": "Climate Justice Organizer",
-      "age": 25,
-      "demographics": {
-        "ethnicity": "Latina",
-        "gender": "Female",
-        "borough": "Bronx"
-      },
-      "position": {
-        "economic": -2,
-        "authority": -2
-      },
-      "population": 0.04,
-      "influenceWeight": 0.7,
-      "icon": "🌍",
-      "support": 0
-    },
-    {
-      "id": "D14",
-      "name": "River",
-      "fullName": "River Johnson",
-      "title": "Gen Z Student Activist",
-      "age": 21,
-      "demographics": {
-        "ethnicity": "Mixed Race",
-        "gender": "Non-binary",
-        "borough": "Manhattan"
-      },
-      "position": {
-        "economic": -1,
-        "authority": -2
-      },
-      "population": 0.04,
-      "influenceWeight": 0.7,
-      "icon": "📱",
-      "support": 0
-    },
-    {
-      "id": "D15",
-      "name": "Emma",
-      "fullName": "Emma Williams",
-      "title": "Healthcare Worker",
-      "age": 36,
-      "demographics": {
-        "ethnicity": "White",
-        "gender": "Female",
-        "borough": "Queens"
-      },
-      "position": {
-        "economic": 0,
-        "authority": -2
-      },
-      "population": 0.06,
-      "influenceWeight": 0.9,
-      "icon": "💉",
-      "support": 0
-    },
-    {
-      "id": "D16",
-      "name": "Tom",
-      "fullName": "Tom Anderson",
-      "title": "Military Veteran",
-      "age": 58,
-      "demographics": {
-        "ethnicity": "White",
-        "gender": "Male",
-        "borough": "Staten Island"
-      },
-      "position": {
-        "economic": 1,
-        "authority": -2
-      },
-      "population": 0.04,
-      "influenceWeight": 0.7,
-      "icon": "🎖️",
+      "id": "lion",
+      "name": "Lion",
+      "title": "Predator Leader",
+      "icon": "images/characters/lion.png",
+      "fallbackEmoji": "🦁",
       "support": 0
     }
   ]
